@@ -40,7 +40,7 @@ class CommandLineInterface
         if input.to_i > 0 && input.to_i < 101
           puts "Here's more info about coin #{input}."
           coin_list = Scraper.new
-          coin_list.list(input)
+          #^ -- this Scraper isn't functional. There is something wrong with the CSS selector that I'm using. 
         else
           puts "Please enter a number 1-100. Or type exit to exit!"
         end

@@ -18,12 +18,10 @@ class Scraper
   end
 
 
-  def self.scrape_page(index_url)
-    html = open(index_url)
+  def self.scrape_page
+    html = open('https://coinmarketcap.com/')
     doc = Nokogiri::HTML(html)
-    coin_list = []
-    puts doc
-    #puts doc.css('.text-center sorting_1')
+    coins = doc.css("div.text-center sorting_1")
   end
 
 
