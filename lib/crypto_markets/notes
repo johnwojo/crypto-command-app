@@ -1,0 +1,4 @@
+#scraper
+#scraper creates new coin objects from what it finds on CoinMarketCap.
+#get_list reveals a list of coin objects in numbered order. It says, "Okay, scraper, you have all 100. I only want 11-20."
+#Then more_info should reveal more information about one of those coins created earlier. Still pulling from the same scraped list of 100. I think.
