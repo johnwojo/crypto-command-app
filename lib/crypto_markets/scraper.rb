@@ -3,6 +3,7 @@ require 'nokogiri'
 require 'open-uri'
 
 
+
 class Scraper
   attr_reader :page
 
