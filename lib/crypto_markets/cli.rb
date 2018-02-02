@@ -6,13 +6,14 @@ class CommandLineInterface
 attr_reader :scraper
 
   def initialize
-    @scraper = scraper
+    @scraper = Scraper.new
   end
 
 
   def run
       welcome
-      request
+      initial_request
+      secondary_request
       more_info
       goodbye
     end
@@ -24,19 +25,39 @@ attr_reader :scraper
       puts "Otherwise, just type 'Exit.'"
     end
 
-    def request
+    def initial_request
       input = gets.strip
-      if input.to_i > 0 && input.to_i < 101
-        puts "Here are coins #{input.to_i} - #{input.to_i+9}."
-        get_list
+      if input.to_i > 0 && input.to_i < 92 && input.downcase != "exit"
+        input = input.to_i
+        input_range = input + 9
+        puts "Here are coins #{input.to_i} - #{input_range}:"
+        counter = 1
+        puts "#{input}. #{self.scraper.coin_list[input - 1].name}"
+        until counter == 10
+          puts "#{input+=1}. #{self.scraper.coin_list[input - 1].name}"
+          counter += 1
+        end
       elsif input.downcase != "exit"
         puts "Invalid input. Try again. Enter 1,11,21,31,etc.."
       end
     end
 
+    def secondary_request
+      puts "Would you like to see another list? If so, enter 1 for 1-10, 11 for 11-20, 21 for 21-30, etc."
+      puts "Otherwise, enter more info for more info on a specific coin."
+      puts "Or enter exit to exit."
+      input = gets.strip
+      if input.to_i > 0 && input.to_i < 92 && input.downcase != "exit"
+        self.initial_request
+      elsif input.downcase != "exit"
+        puts "Invalid input. Try again. Enter 1,11,21,31,etc.."
+        puts "Or type exit to exit"
+      end
+    end
+
     def get_list
-      puts "1. Bitcoin."
-      puts "2. Ethereum."
+      coin_list = Scraper.new
+      coin_list.scrape_page_for_coins[0]
     end
 
     def more_info
@@ -47,7 +68,7 @@ attr_reader :scraper
         if input.to_i > 0 && input.to_i < 101
           puts "Here's more info about coin #{input}."
           coin_list = Scraper.new
-          coin_list.scrape_page
+          coin_list.scrape_page_for_coins
           #^ -- this Scraper isn't functional. There is something wrong with the CSS selector that I'm using.
         else
           puts "Please enter a number 1-100. Or type exit to exit!"
