@@ -3,6 +3,13 @@ require 'nokogiri'
 
 
 class CommandLineInterface
+attr_reader :scraper
+
+  def initialize
+    @scraper = scraper
+  end
+
+
   def run
       welcome
       request
@@ -40,7 +47,8 @@ class CommandLineInterface
         if input.to_i > 0 && input.to_i < 101
           puts "Here's more info about coin #{input}."
           coin_list = Scraper.new
-          #^ -- this Scraper isn't functional. There is something wrong with the CSS selector that I'm using. 
+          coin_list.scrape_page
+          #^ -- this Scraper isn't functional. There is something wrong with the CSS selector that I'm using.
         else
           puts "Please enter a number 1-100. Or type exit to exit!"
         end
