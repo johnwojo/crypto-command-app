@@ -23,11 +23,8 @@ class Scraper
   end
 
   def mass_assignment
-    @coin_list.each do
-    end
-  end
-
-  def self.name
-    @name
+    market_array = []
+    array = @page.css("td.no-wrap.market-cap.text-right")
+    array.each {|market| market_array << market.text.strip}
   end
 end

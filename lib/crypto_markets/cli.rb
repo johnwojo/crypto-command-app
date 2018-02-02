@@ -1,5 +1,6 @@
 require_relative "environment.rb"
 require 'nokogiri'
+require 'pry'
 
 
 class CommandLineInterface
@@ -70,11 +71,10 @@ attr_accessor :continue
       input = gets.strip
       if input.to_i > 0 && input.to_i < 101
         puts "Here's more info about coin number #{input}."
-        self.scraper.coin_list.each do |coin|
-          if coin.rank == input.to_i - 1
-            puts coin.name
-          end
-        end
+        #self.scraper.coin_list.each do |coin|
+        #  if coin.rank == input.to_i - 1
+        #    puts coin.name
+        puts scraper.coin_list[0].market_cap
       else
         puts "Please enter a number 1-100. Or type exit to exit!"
       end
