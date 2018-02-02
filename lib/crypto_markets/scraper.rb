@@ -22,9 +22,19 @@ class Scraper
     end
   end
 
+
+  def scrape_profile_page
+    
+  end
+
   def mass_assignment
     market_array = []
     array = @page.css("td.no-wrap.market-cap.text-right")
     array.each {|market| market_array << market.text.strip}
+    @coin_list.each do |coin| market_array.each do |market|
+      coin.market_cap = market
+    end
+  end
+
   end
 end
