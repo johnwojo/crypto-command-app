@@ -4,14 +4,18 @@ require 'nokogiri'
 
 class CommandLineInterface
 attr_reader :scraper
+attr_accessor :continue
+
 
   def initialize
     @scraper = Scraper.new
+    @continue = "yes"
   end
 
   def run
       puts "Hello! Welcome to the CoinMarketCap scraper. Here you will learn about the top 100 Cryptocurrencies currently in circulation."
       initial_request
+      goodbye
   end
 
   def initial_request
@@ -19,7 +23,9 @@ attr_reader :scraper
     puts "For 11-20, enter 11. For 21-30, enter 21. Etc."
     puts "Otherwise, just type 'Exit.'"
     get_list
-    secondary_request
+    if @continue == "yes"
+      secondary_request
+    end
   end
 
   def secondary_request
@@ -52,19 +58,23 @@ attr_reader :scraper
       end
     elsif input.downcase != "exit"
       puts "Invalid input. Try again. Enter 1,11,21,31,etc.."
+    elsif input.downcase == "exit"
+      @continue = "no"
     end
   end
 
   def more_info
     input = nil
     until input == "exit"
-      puts "Which coin do you want to know more about? 1-100. Or type exit to exit!"
+      puts "Which coin do you want to know more about? Enter a number 1-100. Or type exit to exit!"
       input = gets.strip
       if input.to_i > 0 && input.to_i < 101
-        puts "Here's more info about coin #{input}."
-        coin_list = Scraper.new
-        coin_list.scrape_page_for_coins
-        #^ -- this Scraper isn't functional. There is something wrong with the CSS selector that I'm using.
+        puts "Here's more info about coin number #{input}."
+        self.scraper.coin_list.each do |coin|
+          if coin.rank == input.to_i - 1
+            puts coin.name
+          end
+        end
       else
         puts "Please enter a number 1-100. Or type exit to exit!"
       end

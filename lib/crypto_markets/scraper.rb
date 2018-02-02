@@ -11,17 +11,20 @@ class Scraper
     @page = Nokogiri::HTML(open("https://coinmarketcap.com/"))
     @coin_list = []
     self.scrape_page_for_coins
+    self.mass_assignment
   end
 
   def scrape_page_for_coins
     coin_array = []
-    html = open('https://coinmarketcap.com/')
-    doc = Nokogiri::HTML(html)
-    doc.css("a.currency-name-container").each {|coin| coin_array << coin.text}
+    @page.css("a.currency-name-container").each {|coin| coin_array << coin.text}
     coin_array.each do |crypto| crypto = Coin.new("#{crypto}")
       @coin_list << crypto
     end
-    #coin_list.each {|coin| puts coin.name}
+  end
+
+  def mass_assignment
+    @coin_list.each do
+    end
   end
 
   def self.name

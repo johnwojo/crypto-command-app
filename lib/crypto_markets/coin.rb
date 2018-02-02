@@ -19,5 +19,4 @@ class Coin
   def all
     @@all
   end
-
 end
