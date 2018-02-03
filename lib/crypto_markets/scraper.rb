@@ -1,6 +1,5 @@
 require_relative ('environment.rb')
 require 'nokogiri'
-require 'open-uri'
 require 'pry'
 
 class Scraper
@@ -17,14 +16,18 @@ class Scraper
   def scrape_page_for_coins
     coin_array = []
     @page.css("a.currency-name-container").each {|coin| coin_array << coin.text}
-    coin_array.each do |crypto| crypto = Coin.new("#{crypto}")
+    coin_array.each_with_index do |crypto,index| crypto = Coin.new("#{crypto}")
+      crypto.rank = index.to_i + 1
       @coin_list << crypto
     end
   end
 
 
-  def scrape_profile_page
-    
+  def scrape_profile_page(page)
+    # activate this method.. scrape only the profile page of this particular coin for the new data.
+    doc = Nokogiri::HTML(open(page))
+    market_cap = doc.css("span.data-currency-value").text
+    puts market_cap
   end
 
   def mass_assignment

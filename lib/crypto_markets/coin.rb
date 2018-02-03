@@ -14,7 +14,7 @@ class Coin
     @circulating_supply = circulating_supply
     @daily_change = daily_change
     @rank = rank
-    @profile_page = "http://www.coinmarketcap.com/currencies/" + "#{self.name}"
+    @profile_page = "https://www.coinmarketcap.com/currencies/" + "#{self.name}"
     @@all << self
   end
 

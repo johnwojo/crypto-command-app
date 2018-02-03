@@ -72,13 +72,21 @@ attr_accessor :continue
       if input.to_i > 0 && input.to_i < 101
         input = input.to_i
         puts "Here's more info about coin number #{input}."
+        puts "The coin's rank is #{scraper.coin_list[input-1].rank}."
         puts "The profile page of this coin is: #{scraper.coin_list[input-1].profile_page}."
-        puts "The Market Cap of : #{scraper.coin_list[input-1].market_cap}"
+        puts "The Market Cap of this coin is #{scraper.coin_list[input-1].market_cap}"
+        self.scraper.coin_list.each do |coin|
+          if coin.rank == input
+            puts coin.name
+            self.scraper.scrape_profile_page(coin.profile_page)
+          end
+        end
       else
         puts "Please enter a number 1-100. Or type exit to exit!"
       end
     end
   end
+
 
   def goodbye
     puts "Thanks for using the CoinMarketCap scraper. Have a cryptoriffic day."
