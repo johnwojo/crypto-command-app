@@ -1,7 +1,4 @@
 require_relative "environment.rb"
-require 'nokogiri'
-require 'pry'
-
 
 class CommandLineInterface
 attr_reader :scraper
@@ -71,14 +68,17 @@ attr_accessor :continue
       input = gets.strip
       if input.to_i > 0 && input.to_i < 101
         input = input.to_i
-        puts "Here's more info about coin number #{input}."
-        puts "The coin's rank is #{scraper.coin_list[input-1].rank}."
+        puts "Here's more info about #{scraper.coin_list[input-1].name}."
         puts "The profile page of this coin is: #{scraper.coin_list[input-1].profile_page}."
-        puts "The Market Cap of this coin is #{scraper.coin_list[input-1].market_cap}"
+        puts "The Market Cap of this coin is #{scraper.coin_list[input-1].market_cap}."
+        puts "The current price of this coin is #{scraper.coin_list[input-1].price}."
+        puts "The volume of this coin moved in the last 24 hours is #{scraper.coin_list[input-1].daily_volume}."
+        puts "The circulating supply of this coin is #{scraper.coin_list[input-1].circulating_supply}."
+        puts "The daily change in price of this coin is #{scraper.coin_list[input-1].daily_change}."
         self.scraper.coin_list.each do |coin|
           if coin.rank == input
-            puts coin.name
-            self.scraper.scrape_profile_page(coin.profile_page)
+            #puts coin.name
+            #self.scraper.scrape_profile_page
           end
         end
       else

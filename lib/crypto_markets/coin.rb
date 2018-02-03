@@ -1,5 +1,4 @@
 require_relative "environment.rb"
-require 'nokogiri'
 
 class Coin
   attr_accessor :name, :market_cap, :price, :daily_volume, :circulating_supply, :daily_change, :rank, :attributes, :profile_page
