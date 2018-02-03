@@ -7,12 +7,16 @@ class Scraper
   def initialize
     @page = Nokogiri::HTML(open("https://coinmarketcap.com/"))
     @coin_list = []
-    self.scrape_page_for_coins
-    self.market_cap_assignment
-    self.price_assignment
-    self.daily_volume_assignment
-    self.circulating_supply_assignment
-    self.daily_change_assignment
+    coin_assignment
+  end
+
+  def coin_assignment
+    scrape_page_for_coins
+    market_cap_assignment
+    price_assignment
+    daily_volume_assignment
+    circulating_supply_assignment
+    daily_change_assignment
   end
 
   def scrape_page_for_coins
@@ -23,15 +27,6 @@ class Scraper
       @coin_list << crypto
     end
   end
-
-
-  #def scrape_profile_page
-    # activate this method.. scrape only the profile page of this particular coin for the new data.
-    #doc = Nokogiri::HTML(open("https://coinmarketcap.com/"))
-    #market_cap = doc.css(".no-wrap.market-cap.text-right")[0].text
-    #puts market_cap
-  #end
-
 
   def market_cap_assignment
     array = []
