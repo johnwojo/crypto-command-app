@@ -73,7 +73,7 @@ attr_accessor :continue
         puts "The Market Cap of this coin is #{scraper.coin_list[input-1].market_cap}."
         puts "The current price of this coin is #{scraper.coin_list[input-1].price}."
         puts "The volume of this coin moved in the last 24 hours is #{scraper.coin_list[input-1].daily_volume}."
-        puts "The circulating supply of this coin is #{scraper.coin_list[input-1].circulating_supply}."
+        puts "The circulating supply of this coin is #{scraper.coin_list[input-1].circulating_supply} units."
         puts "The daily change in price of this coin is #{scraper.coin_list[input-1].daily_change}."
         self.scraper.coin_list.each do |coin|
           if coin.rank == input

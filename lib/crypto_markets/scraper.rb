@@ -36,7 +36,7 @@ class Scraper
   def market_cap_assignment
     array = []
     doc = @page.css("td.no-wrap.market-cap.text-right")
-    doc.each {|market| array << market.text.strip}
+    doc.each {|attribute| array << attribute.text.strip}
     counter = 0
     until counter == 100
       coin_list[counter].market_cap = array[counter]
@@ -44,45 +44,51 @@ class Scraper
     end
   end
 
-
   def price_assignment
     array = []
     doc = @page.css("a.price")
-    doc.each {|price| array << price.text.strip}
-    @coin_list.each do |coin| array.each do |price|
-      coin.price = price
-      end
+    doc.each {|attribute| array << attribute.text.strip}
+    counter = 0
+    until counter == 100
+      coin_list[counter].price = array[counter]
+      counter +=1
     end
   end
 
   def daily_volume_assignment
     array = []
-    doc = @page.css("td.no-wrap.market-cap.text-right")
-    doc.each {|volume| array << volume.text.strip}
-    @coin_list.each do |coin| array.each do |volume|
-      coin.daily_volume = volume
-      end
+    doc = @page.css("a.volume")
+    doc.each {|attribute| array << attribute.text.strip}
+    counter = 0
+    until counter == 100
+      coin_list[counter].daily_volume = array[counter]
+      counter +=1
     end
   end
 
 
   def circulating_supply_assignment
     array = []
-    doc = @page.css("td.no-wrap.market-cap.text-right")
-    doc.each {|supply| array << supply.text.strip}
-    @coin_list.each do |coin| array.each do |supply|
-      coin.circulating_supply = supply
-      end
+    doc = @page.css("td.no-wrap.text-right.circulating-supply")
+    doc.each do |attribute|
+      coin = attribute.text.strip.gsub(/\s+[^A-Z]/," ")
+      array << coin.strip
+    end
+    counter = 0
+    until counter == 100
+      coin_list[counter].circulating_supply = array[counter]
+      counter +=1
     end
   end
 
   def daily_change_assignment
     array = []
-    doc = @page.css("td.no-wrap.market-cap.text-right")
-    doc.each {|change| array << change.text.strip}
-    @coin_list.each do |coin| array.each do |change|
-      coin.daily_change = change
-      end
+    doc = @page.css("td.no-wrap.percent-24h")
+    doc.each {|attribute| array << attribute.text.strip}
+    counter = 0
+    until counter == 100
+      coin_list[counter].daily_change = array[counter]
+      counter +=1
     end
   end
 end
