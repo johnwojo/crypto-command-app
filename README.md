@@ -1,9 +1,3 @@
-# CryptoMarkets
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/crypto_markets`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -22,13 +16,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+#TODO:
 
-## Development
+- In order to use the file, type 'bin/run' into the terminal.
+- Once you've been welcomed, the program will prompt you to enter a number.
+- The user will enter 1 for 1-10, 11 for 11-20, 21 for 21-30, etc.
+- After that initial request is made, the user will have the option to make a second request.
+- If the user types 'list,' they will be prompted to repeat the initial request and a list will be provided.
+- If the user types 'info,' they will be asked to enter a number corresponding with a coin that they'd like more info on.
+- If the user types 'exit,' the program will end.
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
