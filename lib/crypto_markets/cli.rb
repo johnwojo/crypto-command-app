@@ -41,6 +41,7 @@ attr_accessor :continue
       more_info
     elsif input.downcase != "exit"
       puts "Invalid input. Try again. Please enter either list, info, or exit."
+      initial_request
     end
   end
 
