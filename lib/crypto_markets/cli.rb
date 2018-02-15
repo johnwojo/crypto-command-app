@@ -4,7 +4,6 @@ class CommandLineInterface
 attr_reader :scraper
 attr_accessor :continue
 
-
   def initialize
     @scraper = Scraper.new
     @continue = "yes"
@@ -32,15 +31,17 @@ attr_accessor :continue
 
   def secondary_request
     puts "Would you like to see another list? If so, type 'list' and press enter."
-    puts "Otherwise, type 'info' for more info on a specific coin."
+    puts "Otherwise, type 'info' for more info on a specific coin. Or enter 'all' for the top 100."
     puts "Or type 'exit' to end the program."
     input = gets.strip
     if input.downcase == "list"
       initial_request
     elsif input.downcase == "info"
       more_info
+    elsif input.downcase == "all"
+      all
     elsif input.downcase != "exit"
-      puts "Invalid input. Try again. Please enter either list, info, or exit."
+      puts "Invalid input."
       initial_request
     end
   end
@@ -90,6 +91,12 @@ attr_accessor :continue
         puts "Please enter a number 1-100. Or type exit to exit!"
       end
     end
+  end
+
+  def all
+    top_100_list = scraper.coin_list[0].pretty_all
+    puts top_100_list
+    secondary_request
   end
 
 
