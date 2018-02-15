@@ -84,7 +84,7 @@ attr_accessor :continue
         puts "24 Hour Volume: #{scraper.coin_list[input-1].daily_volume}"
         puts "Circulating Supply: #{scraper.coin_list[input-1].circulating_supply}"
         puts "24 Hour Price Change: #{scraper.coin_list[input-1].daily_change}"
-        puts "#{coin_name}'s CoinMarketCap rofile page can be found at #{scraper.coin_list[input-1].profile_page}."
+        puts "#{coin_name}'s CoinMarketCap profile page can be found at #{scraper.coin_list[input-1].profile_page}."
         spacer
         spacer
       else
